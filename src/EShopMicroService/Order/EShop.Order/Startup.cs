@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Ordering.Application;
+using Ordering.Infrastructure;
 
 namespace Order.EShop.Order
 {
@@ -28,6 +30,12 @@ namespace Order.EShop.Order
         {
 
             services.AddControllers();
+            #region Add Infrastructure
+
+            services.AddInfrastructure(Configuration);
+            services.AddApplication();
+
+            #endregion
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EShop.Order", Version = "v1" });
