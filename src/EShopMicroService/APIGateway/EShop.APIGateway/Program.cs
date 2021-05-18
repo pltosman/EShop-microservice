@@ -21,6 +21,10 @@ namespace EShop.APIGateway
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                }).ConfigureAppConfiguration((context,config)=> {
+
+                    config.AddJsonFile("ocelot.json");
+
                 });
     }
 }

@@ -1,8 +1,30 @@
 version: '3.4'
 
 services:
+  sourcingdb:
+    image: mongo
+
+  rabbitmq:
+    image: rabbitmq:3-management
+
+  eshopsqldb:
+    image: mcr.microsoft.com/mssql/server
+
   eshop.apigateway:
     image: ${DOCKER_REGISTRY-}eshop
     build:
       context: .
       dockerfile: EShop.APIGateway/Dockerfile
+ 
+  eshop.products:
+    image: ${DOCKER_REGISTRY-}eshop
+    build:
+      context: .
+      dockerfile: Products/EShop.Products/Dockerfile
+
+
+  eshop.order:
+    image: ${DOCKER_REGISTRY-}eshop
+    build:
+      context: .
+      dockerfile: Order/EShop.Order/Dockerfile
