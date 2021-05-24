@@ -16,7 +16,7 @@ using Microsoft.Extensions.Logging;
 
 namespace EShop.Core.Controllers
 {
-    [Route("api/account")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class RegisterController : ControllerBase
     {

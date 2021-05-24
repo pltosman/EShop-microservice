@@ -16,7 +16,7 @@ using EShop.Core.Model.RequestModels;
 namespace EShop.Core.Controllers
 {
     [Authorize]
-    [Route("api/account")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class ConfirmationController : ControllerBase
     {

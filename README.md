@@ -36,3 +36,5 @@ to use any type of database (SQL or NoSQL).
 ### Important Endpoint *
 * [http://localhost:80](http://localhost:80) - Gateway
 * [http://localhost:15672](http://localhost:15672) - RabbitMq management (default login/password: guest/guest)
+* [http://localhost:8081](http://localhost:8081) - Serilog UI
+* [http://localhost:6379](http://localhost:6379) - Redis

@@ -9,7 +9,7 @@ using EShop.Core.Helpers;
 
 namespace EShop.Core.Controllers
 {
-    [Route("api/account")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {

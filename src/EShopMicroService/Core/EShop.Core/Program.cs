@@ -55,7 +55,7 @@ namespace EShop.Core
                 {
                     options.ClearProviders();
                 })
-                .UseUrls("http://localhost:5061")
+                .UseUrls("http://localhost:5001")
                 .UseStartup<Startup>()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseSerilog()

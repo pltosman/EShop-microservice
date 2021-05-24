@@ -222,8 +222,8 @@ namespace EShop.Core
             services
                 .AddDistributedRedisCache(options =>
                 {
+                    options.Configuration = "127.0.0.1";
                     options.InstanceName = "Identity";
-                    options.Configuration = "ec2-18-233-139-31.compute-1.amazonaws.com:8900,password=p09369f3ebf884e2007fe1443aad6128e29d2266c627b63002f5c4011b8a745fd";
                 });
 
             return services;
