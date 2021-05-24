@@ -41,6 +41,21 @@ namespace Products.EShop.Products.Controllers
             return Ok(products);
         }
 
+
+        [HttpGet("{merchantName}", Name = "GetProductsByMerchant")]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<Product>>> GetProductsByMerchantName(string merchantName)
+        {
+            var products = await _productRepository.GetProductByMerchant(merchantName);
+            if (products == null)
+            {
+                _logger.LogError($"Products with merchant : {merchantName},hasn't been found in database");
+                return NotFound();
+            }
+            return Ok(products);
+        }
+
         [HttpGet("{id:length(24)}", Name = "GetProduct")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
@@ -49,7 +64,7 @@ namespace Products.EShop.Products.Controllers
             var product = await _productRepository.GetProduct(id);
             if (product == null)
             {
-                _logger.LogError($"Product with id : {id},hasn't been found in databasei");
+                _logger.LogError($"Product with id : {id},hasn't been found in database");
                 return NotFound();
             }
             return Ok(product);

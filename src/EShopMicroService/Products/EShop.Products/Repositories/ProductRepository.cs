@@ -40,7 +40,11 @@ namespace Products.EShop.Products.Repositories
             var filter = Builders<Product>.Filter.Eq(p => p.Category, categoryName);
             return await _context.Products.Find(filter).ToListAsync();
         }
-
+        public async Task<IEnumerable<Product>> GetProductByMerchant(string merchantName)
+        {
+            var filter = Builders<Product>.Filter.Eq(p => p.Merchant, merchantName);
+            return await _context.Products.Find(filter).ToListAsync();
+        }
         public async Task<IEnumerable<Product>> GetProductByName(string name)
         {
             var filter = Builders<Product>.Filter.ElemMatch(p => p.Name, name);

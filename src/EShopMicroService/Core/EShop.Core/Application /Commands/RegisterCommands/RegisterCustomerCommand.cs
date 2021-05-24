@@ -23,9 +23,6 @@ namespace EShop.Core.Application.Commands.RegisterCommands
         public string Email { get; set; }
 
         [DataMember]
-        public int LanguageId { get; set; }
-
-        [DataMember]
         public string Token { get; set; }
 
         public RegisterCustomerCommand(Guid customerId,
