@@ -11,12 +11,12 @@ namespace EShop.Core.Domain.EntityConfigurations
         {
             builder.ToTable("customer_tokens");
 
-            builder.HasKey(x => x.Id);
+            builder.HasKey(x => x.CustomerTokenId);
 
-            builder.HasIndex(x => x.Id)
+            builder.HasIndex(x => x.CustomerTokenId)
                 .IsUnique();
 
-            builder.Property(x => x.Id)
+            builder.Property(x => x.CustomerTokenId)
                    .HasColumnName("id")
                    .HasColumnType("uuid")
                    .HasDefaultValueSql("uuid_generate_v4()")

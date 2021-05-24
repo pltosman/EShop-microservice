@@ -1,10 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using EShop.Core.Domain.Entities.Base;
 
 namespace EShop.Core.Domain.Entities
 {
     public class CustomerDetail : EntityBase
     {
+        [Key]
         public Guid CustomerId { get; set; }
         public DateTime RegistrationOn { get; set; }
         public string PasswordReminderToken { get; set; }

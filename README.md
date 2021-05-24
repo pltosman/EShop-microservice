@@ -10,7 +10,7 @@ By now, the functional services are still decomposed into four core services. Ea
 
 ### Core service
 ### Product service
-Provides several API for user authentication and authorization with OAuth 2.0.
+Provides several API for product and authorization with OAuth 2.0.
 
 | Method | Path              | Description                                   | Scope |  Privilege |
 |--------|-------------------|-----------------------------------------------|-------|------------|
