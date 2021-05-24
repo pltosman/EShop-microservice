@@ -29,7 +29,7 @@ namespace EShop.Core
                      .Enrich.WithProperty("AppName", "Identity")
                      .Enrich.With<ThreadIdEnricher>()
                      .Enrich.WithExceptionDetails()
-                     .WriteTo.Seq("http://locahost:8081")
+                     .WriteTo.Seq("http://locahost:8081", apiKey: "zWj6SS0b5Vp1GTM95jDp")
                      .CreateLogger();
 
             try
@@ -48,17 +48,17 @@ namespace EShop.Core
                 Log.CloseAndFlush();
             }
         }
-            public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .CaptureStartupErrors(false)
-                .ConfigureLogging(options =>
-                {
-                    options.ClearProviders();
-                })
-                .UseUrls("http://localhost:5001")
-                .UseStartup<Startup>()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseSerilog()
-                .Build();
-        }
+        public static IWebHost BuildWebHost(string[] args) =>
+        WebHost.CreateDefaultBuilder(args)
+            .CaptureStartupErrors(false)
+            .ConfigureLogging(options =>
+            {
+                options.ClearProviders();
+            })
+            .UseUrls("http://localhost:5001")
+            .UseStartup<Startup>()
+            .UseContentRoot(Directory.GetCurrentDirectory())
+            .UseSerilog()
+            .Build();
     }
+}

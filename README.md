@@ -10,15 +10,28 @@ By now, the functional services are still decomposed into four core services. Ea
 
 ### Core service
 
+Provides several API for user authentication and authorization with OAuth 2.0.
+
+| Method | Path              | Description                                   | Scope |
+|--------|-------------------|-----------------------------------------------|-------|
+| POST   | /api/v1/Auth/createtoken  | Get new access token | ui    |
+| POST   | /api/v1/Auth/loginwithemail | Login with email address and password         | ui    |
+| POST   | /api/v1/Auth/refreshtoken  | Get refresh access token | ui    |
+| POST   | /api/v1/Register/register  | Create new customer  | ui    |
+| POST   | /api/v1/Confirmation/emailconfirmation  | Get refresh access token | ui    |
+| POST   | /api/v1/Confirmation/emailconfirm  | Get refresh access token | ui    |
+| POST   | /api/v1/Password/resetpassword  | Update customer's password | ui    |
+
+
 ### Product service
 
-Provides several API for product and authorization with OAuth 2.0.
+Provides several API for product with OAuth 2.0.
 
 | Method | Path                                     | Description                                   | Scope  | Privilege              |
 | ------ | ---------------------------------------- | --------------------------------------------- | ------ | ---------------------- |
 | POST   | /api/v1/product                          | Create new product                            | ui     | ALL_ACCESS             |
-| GET    | /api/v1/product                          | Get All product informations                  | ui     | READ_BASIC_INFORMATION |
-| GET    | /api/v1/productsByMerchant{merchantName} | Get All product informations by Merchant Name | ui     | READ_BASIC_INFORMATION |
+| GET    | /api/v1/product                          | Get All product information                  | ui     | READ_BASIC_INFORMATION |
+| GET    | /api/v1/productsByMerchant{merchantName} | Get All product information by Merchant Name | ui     | READ_BASIC_INFORMATION |
 | PUT    | /api/v1/product/                         | Update product with id                        | server | ALL_ACCESS             |
 | GET    | /api/v1/product/{id}                     | Get current product with id                   | server | ALL_ACCESS             |
 | DELETE | /api/v1/product/{id}                     | Delete current product with id                | server | ALL_ACCESS             |
@@ -36,7 +49,7 @@ docker pull mongo
 
 docker run -d -p 27017:27017 --name EShopMongoDb mongo
 ### Serilog
-
+docker run -d --restart unless-stopped --name seq -e ACCEPT_EULA=Y -v 'PATH':/data -p 8081:80 datalust/seq:latest
 #### Notes
 
 - Each microservice has it's own database and there is no way to access the database directly from other services.
