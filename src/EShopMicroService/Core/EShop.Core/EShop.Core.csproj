@@ -3,9 +3,59 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
-
+  
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+    <PackageReference Include="Dapper" Version="2.0.78" />
+    <PackageReference Include="FluentValidation" Version="10.0.2" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.2.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.5" />
+  
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.2" />
+    <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
+    <PackageReference Include="Serilog.Exceptions" Version="6.1.0" />
+    <PackageReference Include="Serilog.Sinks.Seq" Version="5.0.0" />
+    <PackageReference Include="Z.EntityFramework.Plus.EFCore" Version="5.1.30" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Application \" />
+    <Folder Include="Infrastructure\" />
+    <Folder Include="IntegrationEvents\" />
+    <Folder Include="Model\" />
+    <Folder Include="Application \PipelineBehaviours\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Application \Commands\" />
+    <Folder Include="Application \Commands\Abstractions\" />
+    <Folder Include="Application \Commands\ConfirmationCommands\" />
+    <Folder Include="Application \Commands\RegisterCommands\" />
+    <Folder Include="Application \Commands\ResetPasswordCommands\" />
+    <Folder Include="Model\RequestModels\" />
+    <Folder Include="Model\ResponseModels\" />
+    <Folder Include="Model\Enums\" />
+    <Folder Include="Application \Handlers\" />
+    <Folder Include="Infrastructure\Data\" />
+    <Folder Include="Domain\" />
+    <Folder Include="Domain\Entities\" />
+    <Folder Include="Domain\Entities\Base\" />
+    <Folder Include="Domain\EntityConfigurations\" />
+    <Folder Include="Infrastructure\Enrichers\" />
+    <Folder Include="Services\" />
+    <Folder Include="Infrastructure\Idempotency\" />
+    <Folder Include="Infrastructure\AutofacModules\" />
+    <Folder Include="Infrastructure\Filters\" />
+    <Folder Include="Infrastructure\ActionResults\" />
+    <Folder Include="Infrastructure\Exceptions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\EventBus\EShop.EventBusRabbitMQ\EShop.EventBusRabbitMQ.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
