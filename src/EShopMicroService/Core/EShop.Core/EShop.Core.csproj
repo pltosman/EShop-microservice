@@ -4,6 +4,9 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
     <PackageReference Include="Dapper" Version="2.0.78" />
@@ -25,21 +28,21 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Application \" />
+    <Folder Include="Application\" />
     <Folder Include="Infrastructure\" />
     <Folder Include="IntegrationEvents\" />
     <Folder Include="Model\" />
-    <Folder Include="Application \PipelineBehaviours\" />
+    <Folder Include="Application\PipelineBehaviours\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Application \Commands\" />
-    <Folder Include="Application \Commands\Abstractions\" />
-    <Folder Include="Application \Commands\ConfirmationCommands\" />
-    <Folder Include="Application \Commands\RegisterCommands\" />
-    <Folder Include="Application \Commands\ResetPasswordCommands\" />
+    <Folder Include="Application\Commands\" />
+    <Folder Include="Application\Commands\Abstractions\" />
+    <Folder Include="Application\Commands\ConfirmationCommands\" />
+    <Folder Include="Application\Commands\RegisterCommands\" />
+    <Folder Include="Application\Commands\ResetPasswordCommands\" />
     <Folder Include="Model\RequestModels\" />
     <Folder Include="Model\ResponseModels\" />
     <Folder Include="Model\Enums\" />
-    <Folder Include="Application \Handlers\" />
+    <Folder Include="Application\Handlers\" />
     <Folder Include="Infrastructure\Data\" />
     <Folder Include="Domain\" />
     <Folder Include="Domain\Entities\" />
@@ -57,5 +60,15 @@
     <ProjectReference Include="..\..\EventBus\EShop.EventBusRabbitMQ\EShop.EventBusRabbitMQ.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="appsettings.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="appsettings.json" Condition="'$(ExcludeConfigFilesFromBuildOutput)'!='true'">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
