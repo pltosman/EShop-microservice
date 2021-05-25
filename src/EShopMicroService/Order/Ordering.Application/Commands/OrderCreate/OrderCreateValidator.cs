@@ -6,7 +6,7 @@ namespace Ordering.Application.Commands.OrderCreate
     {
         public OrderCreateValidator()
         {
-            RuleFor(v => v.SellerUserName).EmailAddress().NotEmpty();
+            RuleFor(v => v.MerchantName).NotEmpty();
             RuleFor(v => v.ProductId).NotEmpty();
         }
     }

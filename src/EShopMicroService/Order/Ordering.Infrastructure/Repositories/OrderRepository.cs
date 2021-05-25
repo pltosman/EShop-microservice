@@ -16,10 +16,10 @@ namespace Ordering.Infrastructure.Repositories
 
         }
 
-        public async Task<IEnumerable<Order>> GetOrdersBySellerUserName(string userName)
+        public async Task<IEnumerable<Order>> GetOrdersByMerchantName(string merchantName)
         {
             var orderList = await _dbContext.Orders
-                      .Where(o => o.SellerUserName == userName)
+                      .Where(o => o.MerchantName == merchantName)
                       .ToListAsync();
 
             return orderList;

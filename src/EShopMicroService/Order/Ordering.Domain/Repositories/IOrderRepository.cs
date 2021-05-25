@@ -9,6 +9,6 @@ namespace Ordering.Domain.Repositories
 {
     public interface IOrderRepository : IRepository<Order>
     {
-        Task<IEnumerable<Order>> GetOrdersBySellerUserName(string userName);
+        Task<IEnumerable<Order>> GetOrdersByMerchantName(string merchantName);
     }
 }

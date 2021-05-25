@@ -1,6 +1,6 @@
 # Microservice EShop
 
-This project is a simple .Net 5.0 code for microservice architecture pattern using MediatR,CQRS, and Docker.
+This project is a simple .Net 5.0 code for microservice architecture pattern using MediatR, CQRS, and Docker.
 
 ## Services
 
@@ -53,9 +53,9 @@ docker run -d --restart unless-stopped --name seq -e ACCEPT_EULA=Y -v 'PATH':/da
 #### Notes
 
 - Each microservice has it's own database and there is no way to access the database directly from other services.
-- The services in this project are using MySQL, PostgreSQL, MOngoDB for the persistent storage. In other case, it is also possible for one service
+- The services in this project are using MySQL, PostgreSQL, MongoDB for the persistent storage. In other case, it is also possible for one service
   to use any type of database (SQL or NoSQL).
-- Service-to-service communiation is done by using RabbitMQ.
+- Service-to-service communication is done by using RabbitMQ.
 
 ### Important Endpoint \*
 

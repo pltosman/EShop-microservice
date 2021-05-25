@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Ordering.Application.Commands.OrderCreate;
+using Ordering.Application.Commands.OrderStatus;
 using Ordering.Application.Queries;
 using Ordering.Application.Responses;
 
@@ -25,12 +26,12 @@ namespace Order.EShop.Order.Controller
             _logger = logger;
         }
 
-        [HttpGet("GetOrdersByUserName/{userName}")]
+        [HttpGet("GetOrdersByMerchantNameQuery/{merchantName}")]
         [ProducesResponseType(typeof(IEnumerable<OrderResponse>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<ActionResult<IEnumerable<OrderResponse>>> GetOrdersByUserName(string userName)
+        public async Task<ActionResult<IEnumerable<OrderResponse>>> GetOrdersByUserName(string merchantName)
         {
-            var query = new GetOrdersBySellerUsernameQuery(userName);
+            var query = new GetOrdersByMerchantNameQuery(merchantName);
 
             var orders = await _mediator.Send(query);
             if (orders.Count() == decimal.Zero)
@@ -42,6 +43,14 @@ namespace Order.EShop.Order.Controller
         [HttpPost]
         [ProducesResponseType(typeof(OrderResponse), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<OrderResponse>> OrderCreate([FromBody] OrderCreateCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(OrderResponse), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<OrderResponse>> ChangeOrderStatus([FromBody] OrderStatusCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);

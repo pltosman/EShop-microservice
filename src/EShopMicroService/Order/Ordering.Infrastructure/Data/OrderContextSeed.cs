@@ -26,21 +26,21 @@ namespace Ordering.Infrastructure.Data
                new Order()
                {
                    ProductId = Guid.NewGuid().ToString(),
-                   SellerUserName = "test@test.com",
+                   MerchantName = "Apple",
                    TotalPrice = 1000,
                    CreatedAt = DateTime.UtcNow
                },
                new Order()
                {
                    ProductId = Guid.NewGuid().ToString(),
-                   SellerUserName = "test1@test.com",
+                   MerchantName = "Amazon",
                    TotalPrice = 1000,
                    CreatedAt = DateTime.UtcNow
                },
                new Order()
                {
                    ProductId = Guid.NewGuid().ToString(),
-                   SellerUserName = "test2@test.com",
+                   MerchantName = "Amazon",
                    TotalPrice = 1000,
                    CreatedAt = DateTime.UtcNow
                }

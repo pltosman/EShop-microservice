@@ -1,5 +1,6 @@
 using System;
 using Ordering.Domain.Entities.Base;
+using Ordering.Domain.Enums;
 
 namespace Ordering.Domain.Entities
 {
@@ -8,6 +9,7 @@ namespace Ordering.Domain.Entities
         public string ProductId { get; set; }
         public decimal TotalPrice { get; set; }
         public DateTime CreatedAt { get; set; }
-        public string SellerUserName { get; set; }
+        public string MerchantName { get; set; }
+        public OrderStatus OrderStatus { get; set; } = OrderStatus.WaitingForPayment;
     }
 }
