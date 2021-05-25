@@ -38,6 +38,12 @@ Provides several API for product with OAuth 2.0.
 
 ### Order service
 
+| Method | Path              | Description                                   | Scope |
+|--------|-------------------|-----------------------------------------------|-------|
+| POST   | /api/v1/Order | Create new Order | ui    |
+| POST   | /api/v1/Order/ChangeOrderStatus | Change order status with order id and status        | ui    |
+| GET   | /api/v1/Order/GetOrdersByMerchantNameQuery/{merchantName}  | Get all order indormation by Merchant name | ui    |
+
 ### Payment service
 
 ### APIGateway

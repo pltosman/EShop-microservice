@@ -48,7 +48,7 @@ namespace Order.EShop.Order.Controller
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost("ChangeOrderStatus")]
         [ProducesResponseType(typeof(OrderResponse), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<OrderResponse>> ChangeOrderStatus([FromBody] OrderStatusCommand command)
         {
