@@ -21,10 +21,10 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Payment.Application\Payment.Application.csproj">
+    <ProjectReference Include="..\Payment.Application\Payment.Application.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
-    <ProjectReference Include="Payment.Infrastructure\Payment.Infrastructure.csproj">
+    <ProjectReference Include="..\Payment.Infrastructure\Payment.Infrastructure.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>

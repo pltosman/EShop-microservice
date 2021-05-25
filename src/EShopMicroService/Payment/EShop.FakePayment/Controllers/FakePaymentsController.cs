@@ -4,7 +4,9 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Payment.Ins
+using Payment.Application.Commands.CreatePayment;
+using Payment.Application.Responses;
+
 namespace EShop.FakePayment.Controllers
 {
     [Route("api/v1/[controller]")]
