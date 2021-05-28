@@ -14,7 +14,6 @@ namespace EShop.Core
     {
         public static void Main(string[] args)
         {
-
             Log.Logger = new LoggerConfiguration()
                      .MinimumLevel.Verbose()
                      .Enrich.FromLogContext()
@@ -27,7 +26,6 @@ namespace EShop.Core
                      .Enrich.WithExceptionDetails()
                      .WriteTo.Seq("http://127.0.0.1:8081")
                      .CreateLogger();
-
             try
             {
                 Log.Information("Host starting.");
