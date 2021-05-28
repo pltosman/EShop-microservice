@@ -1,17 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using EShop.Core.Infrastructure.Enrichers;
+using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using System.IO;
 using Serilog;
+using System;
 using Serilog.Events;
 using Serilog.Exceptions;
+using EShop.Core.Infrastructure.Enrichers;
 
 namespace EShop.Core
 {
@@ -19,6 +14,7 @@ namespace EShop.Core
     {
         public static void Main(string[] args)
         {
+
             Log.Logger = new LoggerConfiguration()
                      .MinimumLevel.Verbose()
                      .Enrich.FromLogContext()
@@ -29,7 +25,7 @@ namespace EShop.Core
                      .Enrich.WithProperty("AppName", "Identity")
                      .Enrich.With<ThreadIdEnricher>()
                      .Enrich.WithExceptionDetails()
-                     .WriteTo.Seq("http://locahost:8081", apiKey: "zWj6SS0b5Vp1GTM95jDp")
+                     .WriteTo.Seq("http://127.0.0.1:8081")
                      .CreateLogger();
 
             try
@@ -50,14 +46,14 @@ namespace EShop.Core
         }
         public static IWebHost BuildWebHost(string[] args) =>
         WebHost.CreateDefaultBuilder(args)
-            .CaptureStartupErrors(false)
+            .CaptureStartupErrors(true)
+            .UseUrls("http://localhost:5001")
+            .UseStartup<Startup>()
+            .UseContentRoot(Directory.GetCurrentDirectory())
             .ConfigureLogging(options =>
             {
                 options.ClearProviders();
             })
-            .UseUrls("http://localhost:5001")
-            .UseStartup<Startup>()
-            .UseContentRoot(Directory.GetCurrentDirectory())
             .UseSerilog()
             .Build();
     }
