@@ -6,7 +6,7 @@ namespace Ordering.Domain.Entities.Base
     public abstract class EntityBase : IEntityBase
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; protected set; }
+        public Guid Id { get;  set; }
 
 
         /// <summary>

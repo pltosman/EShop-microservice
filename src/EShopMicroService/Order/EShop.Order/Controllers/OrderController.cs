@@ -16,16 +16,13 @@ namespace Order.EShop.Order.Controller
     [ApiController]
     public class OrderController : ControllerBase
     {
-
         private readonly IMediator _mediator;
         private readonly ILogger<OrderController> _logger;
-
         public OrderController(IMediator mediator, ILogger<OrderController> logger)
         {
             _mediator = mediator;
             _logger = logger;
         }
-
         [HttpGet("GetOrdersByMerchantNameQuery/{merchantName}")]
         [ProducesResponseType(typeof(IEnumerable<OrderResponse>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]

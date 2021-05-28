@@ -1,7 +1,9 @@
+using System;
+
 namespace Ordering.Domain.Entities.Base
 {
     public interface IEntityBase
     {
-       int Id { get; }
+       Guid Id { get; }
     }
 }
