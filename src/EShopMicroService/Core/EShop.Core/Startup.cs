@@ -46,7 +46,6 @@ namespace EShop.Core
 
         public virtual IServiceProvider ConfigureServices(IServiceCollection services)
         {
-
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
             services.AddSingleton<IAccountService, AccountService>();
@@ -116,12 +115,8 @@ namespace EShop.Core
             });
         }
     }
-
-
-
     static class CustomExtensionsMethods
     {
-
         public static IServiceCollection AddCustomMvc(this IServiceCollection services)
         {
             services
@@ -133,9 +128,6 @@ namespace EShop.Core
 
             return services;
         }
-
-
-
         public static IServiceCollection AddCustomDbContext(this IServiceCollection services)
         {
             services
@@ -146,7 +138,6 @@ namespace EShop.Core
 
             return services;
         }
-
         public static IServiceCollection AddCustomJWTToken(this IServiceCollection services, IConfiguration configuration)
         {
             var appSettings = configuration.GetSection("AppSettings").Get<AppSettings>();
@@ -216,7 +207,6 @@ namespace EShop.Core
 
             return services;
         }
-
         public static IServiceCollection AddCustomDistributedCache(this IServiceCollection services)
         {
             services
@@ -228,7 +218,6 @@ namespace EShop.Core
 
             return services;
         }
-
         public static IServiceCollection RegisterEventBus(this IServiceCollection services, IConfiguration configuration)
         {
             var appSettings = configuration.GetSection("AppSettings").Get<AppSettings>();

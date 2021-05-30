@@ -1,11 +1,14 @@
 namespace Ordering.Domain.Enums
 {
-   public enum OrderStatus
+    public enum OrderStatus
     {
+        OrderCancelled,
         WaitingForPayment,
-        OrderPaymentSuccess,   
+        OrderPaymentSuccess,
         OrderConfirmed,
         OrderShipped,
-        OrderDelivered
+        OrderDelivered,
+        OrderReturned,
+        OrderProblem
     }
 }

@@ -30,8 +30,12 @@ namespace Ordering.Application.Handlers
             var order = await _orderRepository.GetByIdAsync(request.OrderId);
             if (order == null)
             {
-                return CommandResult.GetError(ResponseStatus.Error, "An order does not found.");
+                return CommandResult.GetError(ResponseStatus.Error, "Order could not find");
             }
+
+
+
+            //TODO: UoW yapısı kurup bu burada begin end tranc yapısı olmalı dır. 
 
 
             order.OrderStatus = request.OrderStatus;

@@ -54,17 +54,17 @@ namespace Order.EShop.Order.Controller
         {
 
             //TODO: How can i create only one method for all change of status?
+            /*
+                        var requestCommand = new IdentifiedCommand<OrderPaymentSuccessCommand, CommandResult>(command, Guid.NewGuid());
 
-            var requestCommand = new IdentifiedCommand<OrderPaymentSuccessCommand, CommandResult>(command, Guid.NewGuid());
+                        _logger.LogInformation(
+                            "----- Sending command: {CommandName} - {IdProperty}: {CommandId} ({@Command})",
+                            requestCommand.GetGenericTypeName(),
+                            nameof(requestCommand.Command.OrderId),
+                            requestCommand.Command.OrderStatus,
+                            requestCommand);
 
-            _logger.LogInformation(
-                "----- Sending command: {CommandName} - {IdProperty}: {CommandId} ({@Command})",
-                requestCommand.GetGenericTypeName(),
-                nameof(requestCommand.Command.OrderId),
-                requestCommand.Command.OrderStatus,
-                requestCommand);
-
-
+            */
             var result = await _mediator.Send(command);
             return Ok(result);
         }
