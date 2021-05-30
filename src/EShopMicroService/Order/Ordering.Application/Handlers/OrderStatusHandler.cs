@@ -23,7 +23,7 @@ namespace Ordering.Application.Handlers
         public async Task<OrderResponse> Handle(OrderStatusCommand request, CancellationToken cancellationToken)
         {
 
-            if (request.OrderId == Decimal.Zero)
+            if (request.OrderId == null)
                 throw new ApplicationException("OrderID could not be null");
 
             var orderEntity = await _orderRepository.GetByIdAsync(request.OrderId);

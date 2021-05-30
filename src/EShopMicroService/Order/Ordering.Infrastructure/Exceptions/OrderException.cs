@@ -1,6 +1,5 @@
 using System;
-using Ordering.Infrastructure.Enums;
-
+using Ordering.Domain.Enums;
 namespace Ordering.Infrastructure.Exceptions
 {
     public class OrderException : Exception

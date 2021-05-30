@@ -5,10 +5,13 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Ordering.Application.Abstractions;
 using Ordering.Application.Commands.OrderCreate;
+using Ordering.Application.Commands.OrderPaymentSuccess;
 using Ordering.Application.Commands.OrderStatus;
 using Ordering.Application.Queries;
 using Ordering.Application.Responses;
+using Ordering.Domain.Helpers;
 
 namespace Order.EShop.Order.Controller
 {
@@ -49,6 +52,19 @@ namespace Order.EShop.Order.Controller
         [ProducesResponseType(typeof(OrderResponse), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<OrderResponse>> ChangeOrderStatus([FromBody] OrderStatusCommand command)
         {
+
+            //TODO: How can i create only one method for all change of status?
+
+            var requestCommand = new IdentifiedCommand<OrderPaymentSuccessCommand, CommandResult>(command, Guid.NewGuid());
+
+            _logger.LogInformation(
+                "----- Sending command: {CommandName} - {IdProperty}: {CommandId} ({@Command})",
+                requestCommand.GetGenericTypeName(),
+                nameof(requestCommand.Command.OrderId),
+                requestCommand.Command.OrderStatus,
+                requestCommand);
+
+
             var result = await _mediator.Send(command);
             return Ok(result);
         }

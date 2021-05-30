@@ -8,7 +8,7 @@ namespace Ordering.Application.Commands.OrderStatus
     public class OrderStatusCommand : IRequest<OrderResponse>
     {
         [DataMember]
-        public int OrderId { get; set; }
+        public Guid OrderId { get; set; }
 
         [DataMember]
         public Domain.Enums.OrderStatus OrderStatus { get; set; }
@@ -17,7 +17,7 @@ namespace Ordering.Application.Commands.OrderStatus
         public DateTime CreatedAt { get; set; }
 
 
-        public OrderStatusCommand(int orderId, DateTime createdAt, Domain.Enums.OrderStatus status)
+        public OrderStatusCommand(Guid orderId, DateTime createdAt, Domain.Enums.OrderStatus status)
         {
             this.OrderId = orderId;
             this.CreatedAt = createdAt;

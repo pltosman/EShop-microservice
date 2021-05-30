@@ -11,7 +11,6 @@ namespace Ordering.Application.Commands.OrderDelivered
         [DataMember]
         public string OrderId { get; set; }
 
-
         [DataMember]
         public Domain.Enums.OrderStatus OrderStatus { get; set; }
 

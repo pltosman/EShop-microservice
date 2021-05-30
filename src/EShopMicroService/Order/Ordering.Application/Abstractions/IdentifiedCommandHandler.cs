@@ -6,6 +6,7 @@ using Ordering.Application.Commands.OrderDelivered;
 using Ordering.Application.Commands.OrderPaymentReject;
 using Ordering.Application.Commands.OrderPaymentSuccess;
 using Ordering.Application.Commands.OrderShipped;
+using Ordering.Domain.Helpers;
 using Ordering.Domain.Idempotency;
 
 namespace Ordering.Application.Abstractions

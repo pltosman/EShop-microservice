@@ -1,4 +1,4 @@
-namespace Ordering.Infrastructure.Enums
+namespace Ordering.Domain.Enums
 {
    public enum ResponseStatus
     {

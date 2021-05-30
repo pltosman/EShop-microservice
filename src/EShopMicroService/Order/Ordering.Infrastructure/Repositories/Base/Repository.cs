@@ -49,7 +49,7 @@ namespace Ordering.Infrastructure.Repositories.Base
             return await _dbContext.Set<T>().Where(predicate).ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(Guid id)
         {
             return await _dbContext.Set<T>().FindAsync(id);
         }
