@@ -1,7 +1,9 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using EShop.EventBus.Abstractions;
+using EShop.EventBus.Extensions;
 using IntegrationEvents.Events;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -16,30 +18,51 @@ namespace Ordering.Application.Handlers
 {
     public class OrderPaymentSuccessHandler : IRequestHandler<OrderPaymentSuccessCommand, CommandResult>
     {
-        private readonly IOrderRepository _orderRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IEventBus _eventBus;
+        private ILogger<OrderPaymentSuccessHandler> _logger;
 
-        public OrderPaymentSuccessHandler(IOrderRepository orderRepository, IEventBus eventBus)
+        public OrderPaymentSuccessHandler(IUnitOfWork unitOfWork, IEventBus eventBus, ILogger<OrderPaymentSuccessHandler> logger)
         {
-            _orderRepository = orderRepository;
+            _unitOfWork = unitOfWork;
             _eventBus = eventBus;
+            _logger = logger;
         }
 
         public async Task<CommandResult> Handle(OrderPaymentSuccessCommand request, CancellationToken cancellationToken)
         {
-            var order = await _orderRepository.GetByIdAsync(request.OrderId);
+            var order = await _unitOfWork.Orders.GetByIdAsync(request.OrderId);
             if (order == null)
             {
                 return CommandResult.GetError(ResponseStatus.Error, "Order could not find");
             }
 
+            using (var transaction = _unitOfWork.BeginTransaction())
+            {
+                try
+                {
+                    //TODO: create shipment 
+                    order.OrderStatus = request.OrderStatus;
+                    await _unitOfWork.Orders.UpdateAsync(order);
+
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+
+                    _logger.LogError(
+                                        "----- Request processing: {CommandName} - {IdProperty}: {CommandId} ({@Command})",
+                request.GetGenericTypeName(),
+                nameof(request.OrderId),
+                request.OrderStatus,
+                request);
+
+                }
+            }
 
 
-            //TODO: UoW yapısı kurup bu burada begin end tranc yapısı olmalı dır. 
 
-
-            order.OrderStatus = request.OrderStatus;
-            await _orderRepository.UpdateAsync(order);
 
             // If the payment is for a book, create a duplicate packing slip for the royalty department.
             // If the payment is for a physical product or a book, generate a commission payment to the agent.
