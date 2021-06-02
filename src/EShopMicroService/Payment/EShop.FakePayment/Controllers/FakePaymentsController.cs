@@ -24,10 +24,16 @@ namespace EShop.FakePayment.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(PaymentResponse), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<PaymentResponse>> PaymentCreate([FromBody] PaymentCreateCommand command)
+        public async Task<ActionResult<PaymentResponse>> PaymentUrl([FromBody] PaymentCreateCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
+        }
+
+        [HttpGet]
+        public IActionResult Payment()
+        {
+            return Ok();
         }
 
         [HttpPost]

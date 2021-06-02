@@ -5,7 +5,7 @@ namespace Payment.Domain.Entities
 {
     public class Payment : EntityBase
     {
-        public int  OrderId { get; set; }
+        public Guid  OrderId { get; set; }
 
         public string CustomerId { get; set; }
 

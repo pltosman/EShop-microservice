@@ -23,5 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Payment.Domain\Payment.Domain.csproj" />
+    <ProjectReference Include="..\..\EventBus\EShop.EventBus\EShop.EventBus.csproj" />
+    <ProjectReference Include="..\P_IntegrationEvents\P_IntegrationEvents.csproj" />
   </ItemGroup>
 </Project>

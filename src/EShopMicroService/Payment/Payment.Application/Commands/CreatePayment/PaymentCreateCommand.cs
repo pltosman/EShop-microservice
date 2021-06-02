@@ -9,7 +9,7 @@ namespace Payment.Application.Commands.CreatePayment
     public class PaymentCreateCommand : IRequest<PaymentResponse>
     {
         [DataMember]
-        public int OrderId { get; set; }
+        public Guid OrderId { get; set; }
 
         [DataMember]
         public string CustomerId { get; set; }
@@ -17,7 +17,7 @@ namespace Payment.Application.Commands.CreatePayment
         [DataMember]
         public Card Card { get; set; }
 
-        public PaymentCreateCommand(int orderId, string customerId, Card card)
+        public PaymentCreateCommand(Guid orderId, string customerId, Card card)
         {
             OrderId = orderId;
             CustomerId = customerId;

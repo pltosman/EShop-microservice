@@ -6,10 +6,9 @@
 
   <ItemGroup>
     <Folder Include="Events\" />
-    <Folder Include="EventHandling\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\EventBus\EShop.EventBus\EShop.EventBus.csproj" />
-    <ProjectReference Include="..\Ordering.Domain\Ordering.Domain.csproj" />
+    <ProjectReference Include="..\..\Order\Ordering.Domain\Ordering.Domain.csproj" />
   </ItemGroup>
 </Project>

@@ -1,11 +1,13 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Payment.Infrastructure.Enrichers;
+using Serilog;
+using Serilog.Events;
+using Serilog.Exceptions;
 
 namespace EShop.FakePayment
 {
@@ -13,14 +15,45 @@ namespace EShop.FakePayment
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
-        }
+            Log.Logger = new LoggerConfiguration()
+                     .MinimumLevel.Verbose()
+                     .Enrich.FromLogContext()
+                     .MinimumLevel.Override("Microsoft.EntityFrameworkCore", LogEventLevel.Information)
+                     .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Information)
+                     .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                     .MinimumLevel.Override("System", LogEventLevel.Information)
+                     .Enrich.WithProperty("AppName", "Payment")
+                     .Enrich.With<ThreadIdEnricher>()
+                     .Enrich.WithExceptionDetails()
+                     .WriteTo.Seq("http://127.0.0.1:8081")
+                     .CreateLogger();
+            try
+            {
+                Log.Information("Host starting.");
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+                var webHost = BuildWebHost(args);
+                webHost.Run();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Host terminated unexpectedly");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
+        }
+        public static IWebHost BuildWebHost(string[] args) =>
+        WebHost.CreateDefaultBuilder(args)
+            .CaptureStartupErrors(true)
+            .UseUrls("http://localhost:5009")
+            .UseStartup<Startup>()
+            .UseContentRoot(Directory.GetCurrentDirectory())
+            .ConfigureLogging(options =>
+            {
+                options.ClearProviders();
+            })
+            .UseSerilog()
+            .Build();
     }
 }

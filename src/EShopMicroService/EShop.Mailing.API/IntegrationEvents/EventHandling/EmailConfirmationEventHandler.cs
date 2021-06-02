@@ -23,9 +23,9 @@ namespace EShop.Mailing.API.IntegrationEvents.EventHandling
 
         public Task Handle(EmailConfirmationEvent @event)
         {
-            string bodyContent = body[(@event.LanguageId - 1)].Replace("{0}", @event.OtpCode);
+            string bodyContent = body[1].Replace("{0}", @event.OtpCode);
 
-            MailSender.SendGmail(@event.To, subject[(@event.LanguageId - 1)], bodyContent);
+            MailSender.SendGmail(@event.To, subject[1], bodyContent);
 
             return Task.CompletedTask;
         }
