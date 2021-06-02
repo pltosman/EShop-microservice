@@ -5,7 +5,7 @@ using Ordering.Application.Responses;
 
 namespace Ordering.Application.Commands.OrderStatus
 {
-    public class OrderStatusCommand : IRequest<OrderResponse>
+    public class OrderStatusCommand : IRequest<CommandResult>
     {
         [DataMember]
         public Guid OrderId { get; set; }

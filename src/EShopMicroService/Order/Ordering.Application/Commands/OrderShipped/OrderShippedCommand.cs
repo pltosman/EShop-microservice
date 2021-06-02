@@ -4,7 +4,7 @@ using Ordering.Application.Responses;
 
 namespace Ordering.Application.Commands.OrderShipped
 {
-    public class OrderShippedCommand : IRequest<OrderResponse>
+    public class OrderShippedCommand : IRequest<CommandResult>
     {
         // TODO: Only one command class enough for a change of order status 
 

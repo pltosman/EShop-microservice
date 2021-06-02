@@ -22,7 +22,7 @@ namespace EShop.FakePayment.Controllers
             _logger = logger;
         }
 
-        [HttpPost]
+        [HttpPost("PaymentUrl")]
         [ProducesResponseType(typeof(PaymentResponse), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<PaymentResponse>> PaymentUrl([FromBody] PaymentCreateCommand command)
         {

@@ -11,6 +11,7 @@ using Ordering.Application.Commands.OrderPaymentSuccess;
 using Ordering.Application.Commands.OrderStatus;
 using Ordering.Application.Queries;
 using Ordering.Application.Responses;
+using Ordering.Domain.Enums;
 using Ordering.Domain.Helpers;
 
 namespace Order.EShop.Order.Controller
@@ -27,30 +28,33 @@ namespace Order.EShop.Order.Controller
             _logger = logger;
         }
         [HttpGet("GetOrdersByMerchantNameQuery/{merchantName}")]
-        [ProducesResponseType(typeof(IEnumerable<OrderResponse>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<CommandResult>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        public async Task<ActionResult<IEnumerable<OrderResponse>>> GetOrdersByUserName(string merchantName)
+        public async Task<ActionResult<IEnumerable<CommandResult>>> GetOrdersByUserName(string merchantName)
         {
             var query = new GetOrdersByMerchantNameQuery(merchantName);
 
             var orders = await _mediator.Send(query);
-            if (orders.Count() == decimal.Zero)
-                return NotFound();
+
+            if (orders == null)
+            {
+                return Ok(CommandResult.GetError(ResponseStatus.Error, "Unexpected Error"));
+            }
 
             return Ok(orders);
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(OrderResponse), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<OrderResponse>> OrderCreate([FromBody] OrderCreateCommand command)
+        [ProducesResponseType(typeof(CommandResult), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<CommandResult>> OrderCreate([FromBody] OrderCreateCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
         }
 
         [HttpPost("ChangeOrderStatus")]
-        [ProducesResponseType(typeof(OrderResponse), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<OrderResponse>> ChangeOrderStatus([FromBody] OrderStatusCommand command)
+        [ProducesResponseType(typeof(CommandResult), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<CommandResult>> ChangeOrderStatus([FromBody] OrderStatusCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);

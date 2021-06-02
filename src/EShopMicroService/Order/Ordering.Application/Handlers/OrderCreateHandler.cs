@@ -10,7 +10,7 @@ using Ordering.Domain.Repositories;
 
 namespace Ordering.Application.Handlers
 {
-    public class OrderCreateHandler : IRequestHandler<OrderCreateCommand, OrderResponse>
+    public class OrderCreateHandler : IRequestHandler<OrderCreateCommand, CommandResult>
     {
         private readonly IOrderRepository _orderRepository;
         private IMapper _mapper;
@@ -20,7 +20,7 @@ namespace Ordering.Application.Handlers
             _mapper = mapper;
         }
 
-        public async Task<OrderResponse> Handle(OrderCreateCommand request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(OrderCreateCommand request, CancellationToken cancellationToken)
         {
             var orderEntity = _mapper.Map<Order>(request);
 
@@ -31,7 +31,7 @@ namespace Ordering.Application.Handlers
 
             var orderResponse = _mapper.Map<OrderResponse>(order);
 
-            return orderResponse;
+            return CommandResult.GetSuccess(orderResponse, Domain.Enums.ResponseStatus.Success,"Order created.");
         }
     }
 }

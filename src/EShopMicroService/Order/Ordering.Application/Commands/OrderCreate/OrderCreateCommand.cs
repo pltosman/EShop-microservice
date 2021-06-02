@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 
 namespace Ordering.Application.Commands.OrderCreate
 {
-    public class OrderCreateCommand : IRequest<OrderResponse>
+    public class OrderCreateCommand : IRequest<CommandResult>
     {
         [DataMember]
         public string ProductId { get; set; }

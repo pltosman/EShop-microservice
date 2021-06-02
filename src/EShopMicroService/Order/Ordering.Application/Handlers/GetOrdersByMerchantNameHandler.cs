@@ -9,7 +9,7 @@ using Ordering.Domain.Repositories;
 
 namespace Ordering.Application.Handlers
 {
-    public class GetOrdersByMerchantNameHandler : IRequestHandler<GetOrdersByMerchantNameQuery, IEnumerable<OrderResponse>>
+    public class GetOrdersByMerchantNameHandler : IRequestHandler<GetOrdersByMerchantNameQuery, CommandResult>
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IMapper _mapper;
@@ -20,13 +20,13 @@ namespace Ordering.Application.Handlers
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<OrderResponse>> Handle(GetOrdersByMerchantNameQuery request, CancellationToken cancellationToken)
+        public async Task<CommandResult> Handle(GetOrdersByMerchantNameQuery request, CancellationToken cancellationToken)
         {
             var orderList = await _orderRepository.GetOrdersByMerchantName(request.MerchantName);
 
             var response = _mapper.Map<IEnumerable<OrderResponse>>(orderList);
-
-            return response;
+         
+            return CommandResult.GetSuccess(response, Domain.Enums.ResponseStatus.Success, "Order created."); 
         }
     }
 }

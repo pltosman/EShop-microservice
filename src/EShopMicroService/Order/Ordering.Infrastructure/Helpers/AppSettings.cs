@@ -1,8 +1,8 @@
-﻿
-namespace Payment.Infrastructure.Helpers
+﻿using System;
+namespace Ordering.Infrastructure.Helpers
 {
     public class AppSettings
-    {      
+    {
         public RabbitMQSettings RabbitMQSettings { get; set; }
 
     }
@@ -15,5 +15,4 @@ namespace Payment.Infrastructure.Helpers
         public int RetryCount { get; set; }
         public string SubscriptionClientName { get; set; }
     }
-
 }

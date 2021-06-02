@@ -14,6 +14,9 @@ using EShop.EventBus.Abstractions;
 using Autofac;
 using EShop.EventBus;
 using Payment.Infrastructure.Helpers;
+using Payment.Infrastructure.Middlewares;
+using Autofac.Extensions.DependencyInjection;
+using System;
 
 namespace EShop.FakePayment
 {
@@ -27,7 +30,7 @@ namespace EShop.FakePayment
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public virtual IServiceProvider ConfigureServices(IServiceCollection services)
         {
 
             services.AddControllers();
@@ -44,6 +47,12 @@ namespace EShop.FakePayment
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EShop.FakePayment", Version = "v1" });
             });
+
+            var container = new ContainerBuilder();
+            container.Populate(services);
+
+            return new AutofacServiceProvider(container.Build());
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,12 +65,13 @@ namespace EShop.FakePayment
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "EShop.FakePayment v1"));
             }
 
+            app.UseMiddleware<HttpContextLoggingMiddleware>();
             app.UseSerilogRequestLogging(options =>
             {
                 options.EnrichDiagnosticContext = LogHelper.EnrichFromRequest;
             });
 
-
+         
        
 
             app.UseRouting();

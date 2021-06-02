@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Events\" />
-    <Folder Include="EventHandling\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\EventBus\EShop.EventBus\EShop.EventBus.csproj" />

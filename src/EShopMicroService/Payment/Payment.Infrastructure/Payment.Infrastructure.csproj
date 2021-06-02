@@ -19,6 +19,7 @@
     <Folder Include="Repositories\Base\" />
     <Folder Include="Enrichers\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Middlewares\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Payment.Domain\Payment.Domain.csproj" />

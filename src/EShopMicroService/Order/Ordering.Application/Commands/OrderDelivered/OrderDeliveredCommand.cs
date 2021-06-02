@@ -4,7 +4,7 @@ using Ordering.Application.Responses;
 
 namespace Ordering.Application.Commands.OrderDelivered
 {
-    public class OrderDeliveredCommand : IRequest<OrderResponse>
+    public class OrderDeliveredCommand : IRequest<CommandResult>
     {
         [DataMember]
         public string OrderId { get; set; }

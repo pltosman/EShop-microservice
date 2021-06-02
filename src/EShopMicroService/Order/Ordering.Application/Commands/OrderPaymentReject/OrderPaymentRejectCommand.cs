@@ -4,7 +4,7 @@ using Ordering.Application.Responses;
 
 namespace Ordering.Application.Commands.OrderPaymentReject
 {
-    public class OrderPaymentRejectCommand: IRequest<OrderResponse>
+    public class OrderPaymentRejectCommand: IRequest<CommandResult>
     {
         // TODO: Only one command class enough for a change of order status 
 

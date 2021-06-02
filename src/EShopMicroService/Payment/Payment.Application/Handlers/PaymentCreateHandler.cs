@@ -25,7 +25,9 @@ namespace Payment.Application.Handlers
 
         public async Task<PaymentResponse> Handle(PaymentCreateCommand request, CancellationToken cancellationToken)
         {
-           
+
+            _eventBus.Publish(new OrderStatusEvent(request.OrderId, Ordering.Domain.Enums.OrderStatus.OrderConfirmed));
+
             if (request.OrderId == Guid.Empty)
                 throw new ApplicationException("Order Id could not be Empty.");
 
@@ -39,7 +41,7 @@ namespace Payment.Application.Handlers
             var paymentResponse = _mapper.Map<PaymentResponse>(payment);
 
 
-            _eventBus.Publish(new OrderStatusEvent(request.OrderId, Ordering.Domain.Enums.OrderStatus.OrderConfirmed));
+         
 
 
             return paymentResponse;

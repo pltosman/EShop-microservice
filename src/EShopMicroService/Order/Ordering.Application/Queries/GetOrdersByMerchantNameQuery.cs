@@ -4,7 +4,7 @@ using Ordering.Application.Responses;
 
 namespace Ordering.Application.Queries
 {
-    public class GetOrdersByMerchantNameQuery : IRequest<IEnumerable<OrderResponse>>
+    public class GetOrdersByMerchantNameQuery : IRequest<CommandResult>
     {
         public string MerchantName { get; set; }
 
