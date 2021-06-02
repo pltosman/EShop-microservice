@@ -46,6 +46,11 @@ Provides several API for product with OAuth 2.0.
 
 ### Payment service
 
+| Method | Path              | Description                                   | Scope |
+|--------|-------------------|-----------------------------------------------|-------|
+| POST   | /api/v1/PaymentUrl | Create new Payment | ui    |
+| POST   | /api/v1/Payment | Set Token for Payment provider     | ui    |
+| GET   | /api/v1/Payment  | Get Token for Payment provider | ui    |
 ### APIGateway
 
 ### RabbitMQ
