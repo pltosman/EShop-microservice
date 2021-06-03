@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Ordering.Application;
+using Ordering.Application.AutofacModules;
 using Ordering.Infrastructure;
 using Ordering.Infrastructure.Helpers;
 using Ordering.Infrastructure.Middlewares;
@@ -49,7 +50,7 @@ namespace Order.EShop.Order
 
             var container = new ContainerBuilder();
             container.Populate(services);
-
+            container.RegisterModule(new MediatorModule());
             return new AutofacServiceProvider(container.Build());
         }
 

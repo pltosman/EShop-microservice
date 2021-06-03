@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Reflection;
 using Autofac;
+using EShop.Core.Application.Commands.ConfirmationCommands;
 using EShop.Core.Application.Commands.RegisterCommands;
+using EShop.Core.Application.Commands.ResetPasswordCommands;
 using EShop.Core.Application.PipelineBehaviours;
 using EShop.Core.Infrastructure.Idempotency;
 using FluentValidation;
@@ -18,6 +20,9 @@ namespace EShop.Core.Infrastructure.AutofacModules
 
             #region Commands
             builder.RegisterAssemblyTypes(typeof(RegisterCustomerCommand).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
+            builder.RegisterAssemblyTypes(typeof(EmailConfirmCommand).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
+            builder.RegisterAssemblyTypes(typeof(EmailConfirmationCommand).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>));
+            builder.RegisterAssemblyTypes(typeof(ResetPasswordCommand).GetTypeInfo().Assembly).AsClosedTypesOf(typeof(IRequestHandler<,>)); 
             #endregion
 
             #region Queries

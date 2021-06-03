@@ -11,5 +11,6 @@ namespace Ordering.Infrastructure.Data
         }
 
         public DbSet<Order> Orders { get; set; }
+        public DbSet<ClientRequest> ClientRequests { get; set; }
     }
 }

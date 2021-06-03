@@ -6,6 +6,7 @@ using Ordering.Application.Commands.OrderDelivered;
 using Ordering.Application.Commands.OrderPaymentReject;
 using Ordering.Application.Commands.OrderPaymentSuccess;
 using Ordering.Application.Commands.OrderShipped;
+using Ordering.Application.Commands.OrderStatus;
 using Ordering.Domain.Helpers;
 using Ordering.Domain.Idempotency;
 
@@ -45,6 +46,12 @@ namespace Ordering.Application.Abstractions
 
                     switch (command)
                     {
+
+                        case OrderStatusCommand orderStatusCommand:
+                            idProperty = nameof(orderStatusCommand.OrderId);
+                            commandId = orderStatusCommand.OrderStatus.ToString();
+                            break;
+
                         case OrderPaymentSuccessCommand orderPaymentSuccessfulCommand:
                             idProperty = nameof(orderPaymentSuccessfulCommand.OrderId);
                             commandId = orderPaymentSuccessfulCommand.OrderStatus.ToString();
